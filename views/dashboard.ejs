@@ -1,0 +1,116 @@
+<a href="/users/logout" class="btn btn-secondary float-right">Logout</a>
+<h1 class="mt-4">Dashboard </h1>
+
+
+<p class="lead mb-3">Welcome</p>
+
+<br><br>
+
+
+<header class="header_area" style="background-color: white;">
+
+
+    <a href="/reservation/booking">
+        <button type="button" class="btn btn-primary btn-lg mb-4">See Bookings</button>
+    </a>
+</header>
+
+<div class="container">
+    <% include ./partials/messages %>
+        <div class="hotel_reserve_box card pt-4 pb-4 pl-4 pr-4">
+            <h3> Hotel Reservation Form </h3><br>
+
+            <form action='/reservation/booking' method="POST">
+
+                <div class="form-group">
+                    <label>Room/Suite Type</label>
+                    <select class="form-control" id="room_type" name="room_type" onchange="finalCost()">
+                    <option value="0" >Select Room/Suite </option>
+                    <option value="2"> Standard </option>
+                    <option value="3"> Deluxe </option>
+                    <option value="4"> Executive Suite </option>
+                </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Number of room/suite</label>
+                    <select class="form-control" id="room_number" value="33" name="room_number" onchange="finalCost()">
+                    <option value="0" > 0 </option>
+                    <option value="1"> 1 </option>
+                    <option value="2"> 2 </option>
+                    <option value="3"> 3 </option>
+                    <option value="4"> 4 </option>
+                </select>
+                </div>
+                <div class="form-group">
+                    <label>Number of persons</label>
+
+
+                    <select class="form-control" id="person_number" name="person_number" onchange="finalCost()">
+                        <option value="0"> 0 </option>
+                        <option value="1"> 1 </option>
+                        <option value="2"> 2 </option>
+                        <option value="3"> 3 </option>
+                        <option value="4"> 4 </option>
+                        <option value="5"> 5 </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Number of children</label>
+
+                    <select class="form-control" id="child_number" name="child_number" onchange="finalCost()">
+                            <option value="0"> 0 </option>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>from</label>
+                    <input type="date" name="startDate" id="startDate">
+
+                    <label>to </label>
+                    <input type="date" name="endDate" id="endDate">
+                </div><br>
+                <div class="form-group">
+                    <label>Total Cost (USD) : </label>
+                    <span id="result" style="background-color: #7527b0;color: #fff;padding: 6px 70px;font-weight: 600;font-size: 18px; margin-left: 10px;border-radius: 5px;">0</span>
+                </div>
+                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+            </form>
+        </div>
+</div>
+
+<br>
+
+<footer class="footer_area">
+    <div class="footer_bottom">
+        <div class="container">
+            <div class="row">
+                <p>© 2020 All rights reserved</p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+​​
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment.min.js" integrity="sha512-Q1f3TS3vSt1jQ8AwP2OuenztnLU6LwxgyyYOG1jgMW/cbEMHps/3wjvnl1P3WTrF3chJUWEoxDUEjMxDV8pujg==" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    function finalCost() {
+        var roomType = document.getElementById("room_type").value;
+        var roomNum = document.getElementById("room_number").value;
+        var personNum = document.getElementById("person_number").value;
+        var childNum = document.getElementById("child_number").value;
+        var startDate = document.getElementById('startDate').value;
+        var endDate = document.getElementById('endDate').value;
+        var a = moment(startDate);
+        var b = moment(endDate);
+        console.log(a.diff(b, 'days'));
+        var total = (parseInt(roomType) * 10) + ((roomNum) * 10) + ((personNum) * 10) + ((childNum) * 5);
+
+        document.getElementById("result").innerHTML = total;
+    }
+</script>
